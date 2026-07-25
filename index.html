@@ -10,7 +10,7 @@
 <meta property="og:type" content="business.business">
 <meta property="og:title" content="Nail & Brow Studio | By Caterina">
 <meta property="og:description" content="Manichiură, gene, sprâncene — Chișinău, sec. Botanica.">
-<meta property="og:image" content="pic1.jpg">
+<meta property="og:image" content="pic01.jpg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233a0712'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' fill='%23e3c79a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 
@@ -54,13 +54,14 @@ a:focus-visible, button:focus-visible{ outline:1.5px solid var(--ruby); outline-
 .eyebrow{ font-size:0.7rem; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color: var(--ruby); }
 .section-title{ font-size: clamp(1.9rem, 3.6vw, 2.7rem); font-weight:500; letter-spacing:0.005em; margin-top:10px; color: var(--ink); }
 .section-lede{ max-width:520px; margin-top:16px; font-size:0.98rem; line-height:1.75; color: var(--ink-soft); font-weight:300; }
-section{ position:relative; }
+section{ position:relative; scroll-margin-top:76px; }
 .pad{ padding:96px 0; }
 @media (max-width:720px){ .pad{ padding:64px 0; } }
 
 .reveal{ opacity:0; transform:translateY(20px); transition:opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.in{ opacity:1; transform:translateY(0); }
 
+/* NAV */
 .nav{ position:sticky; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:22px 36px; background:var(--paper); border-bottom:1px solid transparent; transition:box-shadow 0.35s var(--ease), padding 0.35s var(--ease), border-color 0.35s var(--ease); }
 .nav.solid{ box-shadow:0 8px 30px rgba(36,16,18,0.06); padding:15px 36px; border-color:var(--line); }
 .nav-brand{ font-family:'Cormorant Garamond',serif; font-size:1.34rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); font-weight:600; }
@@ -75,6 +76,11 @@ section{ position:relative; }
 .nav-icon:hover{ color:var(--ruby); }
 .nav-cta{ display:inline-flex; align-items:center; gap:8px; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--paper); background:var(--ruby); padding:11px 22px; border-radius:1px; transition:background 0.25s var(--ease), transform 0.25s var(--ease); }
 .nav-cta:hover{ background:var(--ruby-bright); transform:translateY(-1px); }
+.lang-switch{ display:flex; align-items:center; gap:2px; margin-right:18px; padding:3px; border:1px solid var(--line); border-radius:20px; }
+.lang-switch button{ background:none; border:none; font-size:0.66rem; font-weight:600; letter-spacing:0.04em; color:var(--ink-soft); padding:5px 10px; border-radius:16px; transition:color 0.25s var(--ease), background 0.25s var(--ease); }
+.lang-switch button.active{ color:var(--paper); background:var(--ruby); }
+.lang-switch button:hover:not(.active){ color:var(--ink); }
+.mobile-menu .lang-switch{ margin-right:0; margin-top:6px; border-color:rgba(36,16,18,0.18); }
 .burger{ display:none; flex-direction:column; gap:5px; background:none; border:none; padding:6px; }
 .burger span{ width:22px; height:1.5px; background:var(--ink); transition:all 0.3s var(--ease); }
 .mobile-menu{ position:fixed; inset:0; background:var(--paper); z-index:199; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:30px; transform:translateY(-100%); transition:transform 0.5s var(--ease); opacity:0; }
@@ -83,94 +89,58 @@ section{ position:relative; }
 .mobile-menu a:hover{ color:var(--ruby); }
 @media (max-width:900px){ .nav-links{ display:none; } .nav-right .nav-cta{ display:none; } .burger{ display:flex; } }
 
-.hero{ display:grid; grid-template-columns:0.85fr 1.15fr; min-height:82vh; }
-@media (max-width:860px){ .hero{ grid-template-columns:1fr; min-height:auto; } }
-.hero-panel{ background: radial-gradient(140% 120% at 15% 0%, var(--ruby) 0%, var(--ruby-deep) 55%, var(--ruby-deeper) 100%); color:var(--cream); display:flex; flex-direction:column; justify-content:center; padding:70px 64px; position:relative; }
-@media (max-width:860px){ .hero-panel{ padding:80px 32px 56px; } }
-.hero-eyebrow{ font-size:0.72rem; font-weight:500; letter-spacing:0.34em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:14px; }
+/* ============ HERO: 4-SQUARE MOSAIC ============ */
+.hero{ padding:20px 20px 0; }
+.hero-grid{ display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,minmax(280px,42vh)); gap:14px; max-width:1240px; margin:0 auto; }
+@media (max-width:760px){ .hero-grid{ grid-template-columns:1fr; grid-template-rows:none; gap:12px; } }
+
+.hero-cell{ position:relative; overflow:hidden; border-radius:2px; }
+.hero-cell img{ width:100%; height:100%; object-fit:cover; transition:transform 0.7s var(--ease); }
+.hero-cell:hover img{ transform:scale(1.05); }
+
+.hero-info{ background: radial-gradient(140% 130% at 15% 0%, var(--ruby) 0%, var(--ruby-deep) 55%, var(--ruby-deeper) 100%); color:var(--cream); display:flex; flex-direction:column; justify-content:center; padding:52px; }
+@media (max-width:760px){ .hero-info{ padding:56px 32px; min-height:60vh; } }
+.hero-eyebrow{ font-size:0.72rem; font-weight:500; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:14px; }
 .hero-eyebrow::before{ content:''; width:30px; height:1px; background:var(--gold); }
-.hero h1{ margin-top:24px; font-size:clamp(2.4rem, 4.4vw, 3.6rem); font-weight:500; line-height:1.08; letter-spacing:0.005em; }
-.hero h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
-.hero-sub{ margin-top:22px; max-width:400px; font-size:0.98rem; line-height:1.8; color:rgba(247,241,233,0.8); font-weight:300; }
-.hero-actions{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; }
-.btn{ display:inline-flex; align-items:center; gap:10px; padding:15px 26px; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:1px; transition:all 0.3s var(--ease); border:1px solid transparent; }
+.hero-info h1{ margin-top:22px; font-size:clamp(2rem, 3.4vw, 2.9rem); font-weight:500; line-height:1.1; }
+.hero-info h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
+.hero-sub{ margin-top:18px; max-width:380px; font-size:0.94rem; line-height:1.8; color:rgba(247,241,233,0.8); font-weight:300; }
+.hero-actions{ margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; }
+.btn{ display:inline-flex; align-items:center; gap:10px; padding:14px 24px; font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:1px; transition:all 0.3s var(--ease); border:1px solid transparent; }
 .btn-solid{ background:var(--paper); color:var(--ruby-deep); }
 .btn-solid:hover{ background:var(--gold); transform:translateY(-2px); }
 .btn-outline{ border-color:rgba(247,241,233,0.4); color:var(--cream); }
 .btn-outline:hover{ border-color:var(--gold); color:var(--gold); }
-.hero-photo{ position:relative; overflow:hidden; background:var(--cream); }
-.hero-photo img{ width:100%; height:100%; object-fit:cover; min-height:340px; }
-.hero-photo .cap{ position:absolute; left:24px; bottom:24px; background:rgba(255,255,255,0.92); padding:12px 18px; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); }
-.hero-photo .cap b{ color:var(--ruby); font-weight:600; }
+.hero-stat{ margin-top:34px; padding-top:22px; border-top:1px solid rgba(201,168,130,0.25); }
+.hero-stat b{ font-family:'Cormorant Garamond',serif; font-size:1.7rem; color:var(--gold); display:block; }
+.hero-stat span{ font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,241,233,0.65); }
 
-.categories{ padding:56px 0 64px; text-align:center; }
-.categories .tag{ font-size:0.98rem; color:var(--ink-soft); font-weight:300; max-width:560px; margin:0 auto; }
-.cat-row{ margin-top:40px; display:flex; justify-content:center; gap:34px; flex-wrap:wrap; }
-.cat-item{ display:flex; flex-direction:column; align-items:center; gap:14px; width:112px; }
-.cat-circle{ width:100px; height:100px; border-radius:50%; overflow:hidden; background:var(--ruby-deep); display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 8px 24px rgba(36,16,18,0.1); transition:transform 0.35s var(--ease); }
-.cat-item:hover .cat-circle{ transform:translateY(-6px); }
-.cat-circle img{ width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
-.cat-circle i{ color:var(--gold); font-size:1.4rem; position:relative; z-index:1; }
-.cat-item span{ font-size:0.74rem; font-weight:500; letter-spacing:0.03em; color:var(--ink); text-align:center; line-height:1.3; }
+/* ============ SERVICII: 6 CERCURI ============ */
+.services{ background:var(--paper); text-align:center; }
+.services .eyebrow, .services .section-lede{ margin-left:auto; margin-right:auto; }
+.services .section-lede{ text-align:center; }
+.circ-row{ margin-top:52px; display:flex; justify-content:center; gap:38px; flex-wrap:wrap; }
+.circ-item{ display:flex; flex-direction:column; align-items:center; gap:16px; width:132px; }
+.circ-photo{ width:118px; height:118px; border-radius:50%; overflow:hidden; background:var(--ruby-deep); box-shadow:0 10px 26px rgba(36,16,18,0.12); transition:transform 0.35s var(--ease), box-shadow 0.35s var(--ease); }
+.circ-item:hover .circ-photo{ transform:translateY(-6px); box-shadow:0 16px 34px rgba(36,16,18,0.18); }
+.circ-photo img{ width:100%; height:100%; object-fit:cover; }
+.circ-item span{ font-size:0.82rem; font-weight:500; letter-spacing:0.02em; color:var(--ink); text-align:center; line-height:1.3; }
 
-.about{ background:var(--cream); }
-.about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px; align-items:center; }
-@media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
-.about-frame{ position:relative; }
-.about-frame img{ border-radius:2px; aspect-ratio:0.95; object-fit:cover; }
-.about-badge{ position:absolute; bottom:-22px; left:-22px; background:var(--ruby-deep); color:var(--cream); padding:18px 22px; border-radius:2px; box-shadow:0 16px 40px rgba(58,7,18,0.22); }
-.about-badge b{ font-family:'Cormorant Garamond',serif; font-size:1.6rem; display:block; color:var(--gold); }
-.about-badge span{ font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,241,233,0.6); }
-@media (max-width:520px){ .about-badge{ left:0; bottom:-18px; padding:12px 16px; } }
-.about-points{ margin-top:30px; display:flex; flex-direction:column; gap:16px; }
-.about-point{ display:flex; gap:16px; align-items:flex-start; }
-.about-point i{ color:var(--ruby); font-size:1rem; margin-top:4px; }
-.about-point p{ font-size:0.93rem; line-height:1.65; color:var(--ink-soft); font-weight:300; }
-.about-point b{ font-weight:500; color:var(--ink); }
-
-.services{ background:var(--paper); }
-.svc-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
-.svc-grid{ margin-top:52px; display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-@media (max-width:860px){ .svc-grid{ grid-template-columns:1fr; } }
-.svc-card{ border:1px solid var(--line); transition:box-shadow 0.35s var(--ease), transform 0.35s var(--ease); }
-.svc-card:hover{ box-shadow:0 20px 44px rgba(36,16,18,0.1); transform:translateY(-4px); }
-.svc-photo{ aspect-ratio:1.2; background:var(--cream); position:relative; overflow:hidden; }
-.svc-photo img{ width:100%; height:100%; object-fit:cover; }
-.svc-photo .fallback{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--ruby-deep); color:var(--gold); font-size:2rem; }
-.svc-body{ padding:26px 26px 30px; }
-.svc-body h3{ font-size:1.4rem; color:var(--ink); font-weight:500; }
-.svc-body ul{ list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:9px; }
-.svc-body li{ font-size:0.85rem; color:var(--ink-soft); font-weight:300; padding-left:14px; position:relative; line-height:1.5; }
-.svc-body li::before{ content:'—'; position:absolute; left:0; color:var(--ruby); }
-.svc-body a{ display:inline-block; margin-top:18px; font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--ruby); border-bottom:1px solid var(--ruby); padding-bottom:2px; }
-
-.prices{ background:var(--cream); }
-.price-tabs{ display:flex; gap:8px; margin-top:44px; flex-wrap:wrap; }
-.price-tab{ font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:11px 22px; border:1px solid var(--line); border-radius:30px; color:var(--ink-soft); background:var(--paper); transition:all 0.3s var(--ease); }
-.price-tab.active{ background:var(--ruby); border-color:var(--ruby); color:var(--paper); }
-.price-tab:not(.active):hover{ border-color:var(--ruby); color:var(--ruby); }
-.price-panel{ display:none; margin-top:30px; background:var(--paper); border:1px solid var(--line); padding:8px 32px; }
-.price-panel.active{ display:block; animation:fadeIn 0.5s var(--ease); }
-@keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
-.price-row{ display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:20px 0; border-bottom:1px solid var(--line); }
-.price-row:last-child{ border-bottom:none; }
-.price-row .pname{ font-size:1.02rem; }
-.price-row .pnote{ display:block; font-size:0.78rem; color:var(--ink-soft); margin-top:3px; font-weight:300; }
-.price-row .pdots{ flex:1; border-bottom:1px dotted var(--line); margin-bottom:6px; }
-.price-row .pval{ font-family:'Cormorant Garamond',serif; font-size:1.22rem; color:var(--ruby); white-space:nowrap; font-weight:600; }
-@media (max-width:600px){ .price-row{ flex-wrap:wrap; } .price-row .pdots{ display:none; } }
-
-.gallery-section{ background:var(--paper); }
-.gallery-grid{ margin-top:48px; column-count:3; column-gap:14px; }
-@media (max-width:860px){ .gallery-grid{ column-count:2; } }
-@media (max-width:480px){ .gallery-grid{ column-count:1; } }
-.gallery-item{ break-inside:avoid; margin-bottom:14px; position:relative; overflow:hidden; border-radius:2px; cursor:zoom-in; opacity:0; transition:opacity 0.6s var(--ease); }
-.gallery-item.loaded{ opacity:1; }
-.gallery-item img{ width:100%; display:block; transition:transform 0.6s var(--ease); }
+/* ============ GALERIE: 9 POZE ============ */
+.gallery-section{ background:var(--cream); }
+.gallery-grid{ margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media (max-width:760px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .gallery-grid{ grid-template-columns:1fr; } }
+.gallery-item{ position:relative; overflow:hidden; border-radius:2px; cursor:zoom-in; aspect-ratio:1; background:var(--paper); }
+.gallery-item img{ width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
 .gallery-item:hover img{ transform:scale(1.06); }
 .gallery-item .zoom-icon{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(36,16,18,0.28); opacity:0; transition:opacity 0.3s var(--ease); color:var(--paper); font-size:1.2rem; }
 .gallery-item:hover .zoom-icon{ opacity:1; }
-.gallery-empty{ text-align:center; padding:40px 0; color:var(--ink-soft); font-size:0.85rem; display:none; }
+
+.gallery-more{ margin-top:36px; display:flex; align-items:center; justify-content:center; gap:12px; }
+.gallery-more p{ font-size:0.9rem; color:var(--ink-soft); font-weight:300; }
+.ig-link{ display:inline-flex; align-items:center; gap:10px; font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--paper); padding:13px 24px; border-radius:1px; background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.ig-link:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(220,39,67,0.3); }
 
 .lightbox{ position:fixed; inset:0; background:rgba(15,2,5,0.94); z-index:400; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.35s var(--ease); }
 .lightbox.open{ opacity:1; pointer-events:auto; }
@@ -182,37 +152,27 @@ section{ position:relative; }
 .lb-arrow:hover{ background:rgba(201,168,130,0.16); border-color:rgba(201,168,130,0.55); }
 .lb-prev{ left:16px; } .lb-next{ right:16px; }
 
-.testimonials{ background:var(--cream); }
-.testi-grid{ margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-@media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
-.testi-card{ background:var(--paper); border:1px solid var(--line); padding:32px; }
-.testi-card .stars{ color:var(--gold-soft); font-size:0.8rem; letter-spacing:2px; }
-.testi-card p{ margin-top:16px; font-size:0.92rem; line-height:1.7; color:var(--ink-soft); font-weight:300; font-style:italic; }
-.testi-card .who{ margin-top:20px; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ruby); font-weight:500; }
-
+/* ============ CONTACT ============ */
 .contact{ background:radial-gradient(120% 100% at 15% 0%, var(--ruby) 0%, var(--ruby-deep) 55%, var(--ruby-deeper) 100%); color:var(--cream); }
 .contact .eyebrow{ color:var(--gold); }
 .contact .section-title{ color:var(--cream); }
 .contact .section-lede{ color:rgba(247,241,233,0.78); }
-.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
-@media (max-width:860px){ .contact-grid{ grid-template-columns:1fr; gap:44px; } }
-.contact-list{ margin-top:32px; display:flex; flex-direction:column; gap:22px; }
-.contact-row{ display:flex; gap:16px; align-items:flex-start; }
-.contact-row i{ color:var(--gold); font-size:1.05rem; margin-top:3px; width:20px; }
-.contact-row b{ display:block; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:4px; }
+.contact-inner{ max-width:560px; margin:0 auto; text-align:center; }
+.contact-inner .eyebrow, .contact-inner .section-lede{ margin-left:auto; margin-right:auto; }
+.contact-list{ margin-top:32px; display:flex; flex-direction:column; gap:18px; align-items:center; }
+.contact-row{ display:flex; gap:14px; align-items:center; }
+.contact-row i{ color:var(--gold); font-size:1.05rem; width:20px; text-align:center; }
+.contact-row b{ font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-soft); margin-right:6px; }
 .contact-row span, .contact-row a{ color:var(--cream); font-size:0.98rem; font-weight:300; }
 .contact-row a:hover{ color:var(--gold); }
-.social-row{ display:flex; gap:12px; margin-top:32px; }
-.social-btn{ width:44px; height:44px; border-radius:50%; border:1px solid rgba(201,168,130,0.3); display:flex; align-items:center; justify-content:center; color:var(--cream); font-size:1rem; transition:all 0.3s var(--ease); }
-.social-btn:hover{ background:var(--gold); color:var(--ruby-deep); border-color:var(--gold); transform:translateY(-3px); }
-.book-card{ background:rgba(247,241,233,0.05); border:1px solid rgba(201,168,130,0.22); padding:38px; }
-.book-card h3{ font-size:1.6rem; color:var(--cream); font-weight:500; }
-.book-card p{ margin-top:12px; color:rgba(247,241,233,0.78); font-size:0.9rem; line-height:1.7; font-weight:300; }
-.book-actions{ margin-top:24px; display:flex; flex-direction:column; gap:12px; }
-.book-actions .btn{ justify-content:center; }
-.hours{ margin-top:26px; padding-top:22px; border-top:1px solid rgba(201,168,130,0.18); }
-.hours-row{ display:flex; justify-content:space-between; font-size:0.85rem; padding:6px 0; color:rgba(247,241,233,0.75); }
-.hours-row b{ color:var(--cream); font-weight:400; }
+.social-row{ display:flex; justify-content:center; gap:14px; margin-top:36px; }
+.social-btn{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.1rem; transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+.social-btn:hover{ transform:translateY(-4px); box-shadow:0 12px 26px rgba(0,0,0,0.3); }
+.social-btn.ig{ background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social-btn.fb{ background:#1877F2; }
+.social-btn.vb{ background:#7360F2; }
+.social-btn.wa{ background:#25D366; }
+.social-btn.ph{ background:var(--gold); color:var(--ruby-deep); }
 
 footer{ background:var(--ruby-deeper); padding:26px 0; text-align:center; }
 footer p{ font-size:0.68rem; letter-spacing:0.06em; color:rgba(247,241,233,0.45); }
@@ -224,285 +184,317 @@ footer p b{ color:var(--gold); font-weight:500; }
 <nav class="nav" id="nav">
   <a href="#top" class="nav-brand">Nail<span> &amp; Brow</span> Studio</a>
   <ul class="nav-links">
-    <li><a href="#despre">Despre</a></li>
-    <li><a href="#servicii">Servicii</a></li>
-    <li><a href="#preturi">Prețuri</a></li>
-    <li><a href="#galerie">Galerie</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#servicii" data-i18n="nav_servicii">Servicii</a></li>
+    <li><a href="#galerie" data-i18n="nav_galerie">Galerie</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <a class="nav-icon" href="https://instagram.com/lami.studio.by.caterina" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-    <a class="nav-icon" href="tel:+37368135924" aria-label="Telefon"><i class="fa-solid fa-phone"></i></a>
-    <a class="nav-cta" href="https://wa.me/37368135924" target="_blank" rel="noopener">Programează-te</a>
+  <div class="lang-switch" id="langSwitch" role="group" aria-label="Limbă / Language / Язык">
+    <button type="button" data-lang="ro">RO</button>
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="en">EN</button>
   </div>
-  <button class="burger" id="burger" aria-label="Meniu"><span></span><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="Meniu" data-i18n-aria="aria_menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#despre">Despre</a>
-  <a href="#servicii">Servicii</a>
-  <a href="#preturi">Prețuri</a>
-  <a href="#galerie">Galerie</a>
-  <a href="#contact">Contact</a>
+  <a href="#servicii" data-i18n="nav_servicii">Servicii</a>
+  <a href="#galerie" data-i18n="nav_galerie">Galerie</a>
+  <a href="#contact" data-i18n="nav_contact">Contact</a>
+  <div class="lang-switch" id="langSwitchMobile" role="group" aria-label="Limbă / Language / Язык">
+    <button type="button" data-lang="ro">RO</button>
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
 </div>
 
-<section id="top">
-  <div class="hero">
-    <div class="hero-panel">
-      <div class="hero-eyebrow">Chișinău · Sec. Botanica</div>
-      <h1>Frumusețea stă<br>în <em>detalii.</em></h1>
-      <p class="hero-sub">Manichiură, extensii de unghii, gene și sprâncene — realizate cu grijă și materiale premium, în studioul Caterinei.</p>
+<!-- ============ HERO: 4 SQUARES ============ -->
+<section id="top" class="hero">
+  <div class="hero-grid reveal">
+    <div class="hero-cell hero-info">
+      <div class="hero-eyebrow" data-i18n="hero_eyebrow">Chișinău · Sec. Botanica</div>
+      <h1 data-i18n-html="hero_h1">Frumusețea stă<br>în <em>detalii.</em></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Manichiură, extensii de unghii, gene și sprâncene — realizate cu grijă și materiale premium, în studioul Caterinei.</p>
       <div class="hero-actions">
-        <a class="btn btn-solid" href="https://wa.me/37368135924" target="_blank" rel="noopener">Programează-te</a>
-        <a class="btn btn-outline" href="#galerie">Vezi galeria</a>
+        <a class="btn btn-outline" href="#galerie" data-i18n="hero_btn">Vezi galeria</a>
+      </div>
+      <div class="hero-stat">
+        <b>1500+</b>
+        <span data-i18n="hero_stat_label">Cliente mulțumite</span>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="pic1.jpg" alt="Manichiură realizată în studio" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()">
-      <div class="cap"><b>1500+</b> cliente mulțumite</div>
+    <div class="hero-cell">
+      <img src="images/pic2.jpg" alt="Manichiură realizată în studio" onerror="this.parentElement.style.background='var(--cream)'; this.remove()">
+    </div>
+    <div class="hero-cell">
+      <img src="images/pic18.jpg" alt="Detaliu extensii unghii" onerror="this.parentElement.style.background='var(--cream)'; this.remove()">
+    </div>
+    <div class="hero-cell">
+      <img src="images/pic50.jpg" alt="Laminare gene și sprâncene" onerror="this.parentElement.style.background='var(--cream)'; this.remove()">
     </div>
   </div>
 </section>
 
-<section class="categories">
-  <div class="container">
-    <div class="eyebrow" style="text-align:center;">Ce oferim</div>
-    <p class="tag">De la o manichiură simplă până la un look complet — alege categoria care te interesează.</p>
-    <div class="cat-row reveal">
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic2.jpg" alt="" onerror="this.remove()"><i class="fa-solid fa-hand-sparkles"></i></span>
-        <span>Manichiură</span>
-      </a>
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic3.jpg" alt="" onerror="this.remove()"><i class="fa-solid fa-shoe-prints"></i></span>
-        <span>Pedichiură</span>
-      </a>
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic4.jpg" alt="" onerror="this.remove()"><i class="fa-solid fa-gem"></i></span>
-        <span>Extensii unghii</span>
-      </a>
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic5.jpg" alt="" onerror="this.remove()"><i class="fa-regular fa-eye"></i></span>
-        <span>Gene</span>
-      </a>
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic6.jpg" alt="" onerror="this.remove()"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-        <span>Sprâncene</span>
-      </a>
-      <a class="cat-item" href="#servicii">
-        <span class="cat-circle"><img src="pic7.jpg" alt="" onerror="this.remove()"><i class="fa-solid fa-paintbrush"></i></span>
-        <span>Nail art</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="about pad" id="despre">
-  <div class="container about-grid">
-    <div class="about-frame reveal">
-      <img src="pic8.jpg" alt="Caterina la lucru" onerror="this.closest('.about-frame').style.display='none'">
-      <div class="about-badge">
-        <b>7+</b>
-        <span>Ani în domeniu</span>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="eyebrow">Despre studio</div>
-      <h2 class="section-title">Un spațiu gândit<br>pentru tine</h2>
-      <p class="section-lede">
-        Nail &amp; Brow Studio este locul unde manichiura, genele și sprâncenele primesc aceeași atenție ca o operă de artă — precisă, curată, de durată. Caterina lucrează exclusiv cu materiale premium, instrumente sterilizate și tehnici actualizate constant.
-      </p>
-      <div class="about-points">
-        <div class="about-point"><i class="fa-solid fa-hand-sparkles"></i><p><b>Igienă strictă.</b> Instrumente sterilizate individual pentru fiecare clientă.</p></div>
-        <div class="about-point"><i class="fa-solid fa-gem"></i><p><b>Materiale premium.</b> Produse profesionale, sigure pentru piele și unghii sensibile.</p></div>
-        <div class="about-point"><i class="fa-solid fa-clock"></i><p><b>Rezultat de durată.</b> Tehnici lucrate în detaliu, care rezistă în timp.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ============ SERVICII: 6 CERCURI ============ -->
 <section class="services pad" id="servicii">
   <div class="container">
-    <div class="svc-head reveal">
-      <div>
-        <div class="eyebrow">Servicii</div>
-        <h2 class="section-title">Ce facem</h2>
-      </div>
-      <p class="section-lede">De la o manichiură simplă până la un look complet — unghii, gene, sprâncene — totul într-o singură vizită.</p>
-    </div>
-
-    <div class="svc-grid reveal">
-      <div class="svc-card">
-        <div class="svc-photo"><img src="pic9.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;"><i class="fa-solid fa-hand-sparkles"></i></div></div>
-        <div class="svc-body">
-          <h3>Manichiură &amp; Unghii</h3>
-          <ul>
-            <li>Manichiură clasică / hardware</li>
-            <li>Acoperire cu oja semipermanentă</li>
-            <li>Extensii unghii — gel</li>
-            <li>Design &amp; nail art</li>
-            <li>Pedichiură clasică / hardware</li>
-          </ul>
-          <a href="#preturi">Vezi prețuri →</a>
-        </div>
-      </div>
-      <div class="svc-card">
-        <div class="svc-photo"><img src="pic10.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;"><i class="fa-regular fa-eye"></i></div></div>
-        <div class="svc-body">
-          <h3>Gene</h3>
-          <ul>
-            <li>Laminare gene</li>
-            <li>Extensii gene — clasic</li>
-            <li>Extensii gene — volum 2D/3D</li>
-            <li>Vopsire gene</li>
-          </ul>
-          <a href="#preturi">Vezi prețuri →</a>
-        </div>
-      </div>
-      <div class="svc-card">
-        <div class="svc-photo"><img src="pic11.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none;"><i class="fa-solid fa-wand-magic-sparkles"></i></div></div>
-        <div class="svc-body">
-          <h3>Sprâncene</h3>
-          <ul>
-            <li>Laminare sprâncene</li>
-            <li>Corectare formă</li>
-            <li>Vopsire / henna</li>
-            <li>Styling &amp; fixare</li>
-          </ul>
-          <a href="#preturi">Vezi prețuri →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="prices pad" id="preturi">
-  <div class="container">
     <div class="reveal">
-      <div class="eyebrow">Prețuri</div>
-      <h2 class="section-title">Listă de prețuri</h2>
-      <p class="section-lede">Prețurile pot varia ușor în funcție de complexitate. Pentru o ofertă exactă, scrie-ne direct.</p>
+      <div class="eyebrow" data-i18n="services_eyebrow">Servicii</div>
+      <h2 class="section-title" data-i18n="services_title">Ce facem</h2>
+      <p class="section-lede" data-i18n="services_lede">De la o manichiură simplă până la un look complet — unghii, gene, sprâncene — totul într-o singură vizită.</p>
     </div>
 
-    <div class="price-tabs reveal">
-      <button class="price-tab active" data-tab="nails">Unghii</button>
-      <button class="price-tab" data-tab="lashes">Gene</button>
-      <button class="price-tab" data-tab="brows">Sprâncene</button>
-    </div>
-
-    <div class="price-panel active" id="panel-nails">
-      <div class="price-row"><div><div class="pname">Manichiură clasică</div><span class="pnote">Fără acoperire</span></div><div class="pdots"></div><div class="pval">250 lei</div></div>
-      <div class="price-row"><div><div class="pname">Manichiură + oja semipermanentă</div></div><div class="pdots"></div><div class="pval">400 lei</div></div>
-      <div class="price-row"><div><div class="pname">Extensii unghii — gel</div><span class="pnote">Set complet</span></div><div class="pdots"></div><div class="pval">550 lei</div></div>
-      <div class="price-row"><div><div class="pname">Design &amp; nail art</div><span class="pnote">Preț per unghie</span></div><div class="pdots"></div><div class="pval">de la 10 lei</div></div>
-      <div class="price-row"><div><div class="pname">Pedichiură hardware</div></div><div class="pdots"></div><div class="pval">450 lei</div></div>
-    </div>
-
-    <div class="price-panel" id="panel-lashes">
-      <div class="price-row"><div><div class="pname">Laminare gene</div><span class="pnote">Include vopsire</span></div><div class="pdots"></div><div class="pval">400 lei</div></div>
-      <div class="price-row"><div><div class="pname">Extensii gene — clasic</div></div><div class="pdots"></div><div class="pval">500 lei</div></div>
-      <div class="price-row"><div><div class="pname">Extensii gene — volum 2D/3D</div></div><div class="pdots"></div><div class="pval">600 lei</div></div>
-      <div class="price-row"><div><div class="pname">Vopsire gene</div></div><div class="pdots"></div><div class="pval">150 lei</div></div>
-    </div>
-
-    <div class="price-panel" id="panel-brows">
-      <div class="price-row"><div><div class="pname">Laminare sprâncene</div><span class="pnote">Include corectare + vopsire</span></div><div class="pdots"></div><div class="pval">350 lei</div></div>
-      <div class="price-row"><div><div class="pname">Corectare formă</div></div><div class="pdots"></div><div class="pval">150 lei</div></div>
-      <div class="price-row"><div><div class="pname">Vopsire / henna sprâncene</div></div><div class="pdots"></div><div class="pval">150 lei</div></div>
+    <div class="circ-row reveal">
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic4.jpg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_manichiura">Manichiură &amp; Unghii</span>
+      </div>
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic29.jpeg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_pedichiura">Pedichiură</span>
+      </div>
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic8.jpg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_extensii">Extensii Unghii</span>
+      </div>
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic18.jpg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_gene">Gene</span>
+      </div>
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic17.jpg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_sprancene">Sprâncene</span>
+      </div>
+      <div class="circ-item">
+        <span class="circ-photo"><img src="images/pic7.jpg" alt="" onerror="this.parentElement.style.background='var(--ruby-deep)'; this.remove()"></span>
+        <span data-i18n="service_nailart">Nail Art</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ============ GALERIE: 9 POZE ============ -->
 <section class="gallery-section pad" id="galerie">
   <div class="container">
     <div class="reveal">
-      <div class="eyebrow">Galerie</div>
-      <h2 class="section-title">Lucrări recente</h2>
+      <div class="eyebrow" data-i18n="gallery_eyebrow">Galerie</div>
+      <h2 class="section-title" data-i18n="gallery_title">Lucrări recente</h2>
+      <p class="section-lede" data-i18n="gallery_lede">O selecție de nouă lucrări din studio — atinge orice fotografie pentru a o vedea mărită.</p>
     </div>
-    <div class="gallery-grid" id="gallery"></div>
-    <p class="gallery-empty" id="galleryEmpty">Fotografiile vor apărea aici — adaugă pic1.jpg, pic2.jpg... în folderul site-ului.</p>
-  </div>
-</section>
-
-<section class="testimonials pad">
-  <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Recenzii</div>
-      <h2 class="section-title">Ce spun clientele</h2>
+    <div class="gallery-grid reveal" id="gallery">
+      <!-- 9 fotografii: images/pic1.jpg – images/pic9.jpg -->
     </div>
-    <div class="testi-grid reveal">
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>„Manichiura ține impecabil săptămâni la rând. Caterina e foarte atentă la detalii.”</p>
-        <div class="who">— Alina M.</div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>„Laminarea genelor mi-a schimbat complet privirea, fără să fac extensii. Recomand!”</p>
-        <div class="who">— Cristina D.</div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>„Ambianță plăcută, igienă la superlativ și rezultat exact cum mi-am dorit.”</p>
-        <div class="who">— Natalia P.</div>
-      </div>
+    <div class="gallery-more reveal">
+      <a class="ig-link" href="https://instagram.com/lami.studio.by.caterina" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> <span data-i18n="gallery_ig_link">Mai multe pe Instagram</span></a>
     </div>
   </div>
 </section>
 
+<!-- ============ CONTACT ============ -->
 <section class="contact pad" id="contact">
-  <div class="container contact-grid">
+  <div class="container contact-inner">
     <div class="reveal">
-      <div class="eyebrow">Contact</div>
-      <h2 class="section-title">Hai să ne cunoaștem</h2>
-      <p class="section-lede">Scrie-ne pentru o programare sau treci pe la studio — te așteptăm cu drag.</p>
-
-      <div class="contact-list">
-        <div class="contact-row"><i class="fa-solid fa-location-dot"></i><div><b>Adresă</b><span>Chișinău, sec. Botanica</span></div></div>
-        <div class="contact-row"><i class="fa-solid fa-phone"></i><div><b>Telefon</b><a href="tel:+37368135924">068 135 924</a></div></div>
-        <div class="contact-row"><i class="fa-brands fa-instagram"></i><div><b>Instagram</b><a href="https://instagram.com/lami.studio.by.caterina" target="_blank" rel="noopener">@lami.studio.by.caterina</a></div></div>
-      </div>
-
-      <div class="social-row">
-        <a class="social-btn" href="https://instagram.com/lami.studio.by.caterina" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="social-btn" href="https://www.facebook.com/lamistudio.bycaterina" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a class="social-btn" href="viber://chat?number=%2B37368135924" aria-label="Viber"><i class="fa-brands fa-viber"></i></a>
-        <a class="social-btn" href="https://wa.me/37368135924" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-        <a class="social-btn" href="tel:+37368135924" aria-label="Telefon"><i class="fa-solid fa-phone"></i></a>
-      </div>
+      <div class="eyebrow" data-i18n="contact_eyebrow">Contact</div>
+      <h2 class="section-title" data-i18n="contact_title">Hai să ne cunoaștem</h2>
+      <p class="section-lede" data-i18n="contact_lede">Scrie-ne pentru o programare sau treci pe la studio — te așteptăm cu drag.</p>
     </div>
 
-    <div class="book-card reveal">
-      <h3>Programează-te acum</h3>
-      <p>Cel mai rapid mod de a rezerva o oră este prin WhatsApp sau Viber — răspundem în aceeași zi.</p>
-      <div class="book-actions">
-        <a class="btn btn-solid" href="https://wa.me/37368135924" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Scrie pe WhatsApp</a>
-        <a class="btn btn-outline" href="viber://chat?number=%2B37368135924"><i class="fa-brands fa-viber"></i> Scrie pe Viber</a>
-        <a class="btn btn-outline" href="tel:+37368135924"><i class="fa-solid fa-phone"></i> Sună acum</a>
-      </div>
-      <div class="hours">
-        <div class="hours-row"><span>Luni – Vineri</span><b>09:00 – 19:00</b></div>
-        <div class="hours-row"><span>Sâmbătă</span><b>10:00 – 17:00</b></div>
-        <div class="hours-row"><span>Duminică</span><b>Închis</b></div>
-      </div>
+    <div class="contact-list reveal">
+      <div class="contact-row"><i class="fa-solid fa-location-dot"></i><span><b data-i18n="contact_address_label">Adresă</b><span data-i18n="contact_address_value">Chișinău, sec. Botanica</span></span></div>
+      <div class="contact-row"><i class="fa-solid fa-phone"></i><span><b data-i18n="contact_phone_label">Telefon</b></span><a href="tel:+37368135924">068 135 924</a></div>
+    </div>
+
+    <div class="social-row reveal">
+      <a class="social-btn ig" href="https://instagram.com/lami.studio.by.caterina" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a class="social-btn fb" href="https://www.facebook.com/lamistudio.bycaterina" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a class="social-btn vb" href="viber://chat?number=%2B37368135924" aria-label="Viber"><i class="fa-brands fa-viber"></i></a>
+      <a class="social-btn wa" href="https://wa.me/37368135924" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a class="social-btn ph" href="tel:+37368135924" aria-label="Telefon"><i class="fa-solid fa-phone"></i></a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© <span id="year"></span> <b>Nail &amp; Brow Studio</b> by Caterina — Chișinău, sec. Botanica</p>
+  <p>© <span id="year"></span> <b>Nail &amp; Brow Studio</b> by Caterina — <span data-i18n="footer_location">Chișinău, sec. Botanica</span></p>
 </footer>
 
 <div class="lightbox" id="lightbox">
   <span class="lb-counter" id="lb-counter"></span>
-  <button class="lightbox-close" onclick="closeLb()" aria-label="Închide">✕</button>
-  <button class="lb-arrow lb-prev" onclick="shiftLb(-1)" aria-label="Anterior">‹</button>
+  <button class="lightbox-close" onclick="closeLb()" aria-label="Închide" data-i18n-aria="aria_close">✕</button>
+  <button class="lb-arrow lb-prev" onclick="shiftLb(-1)" aria-label="Anterior" data-i18n-aria="aria_prev">‹</button>
   <img class="lightbox-img" id="lb-img" src="" alt="">
-  <button class="lb-arrow lb-next" onclick="shiftLb(1)" aria-label="Următor">›</button>
+  <button class="lb-arrow lb-next" onclick="shiftLb(1)" aria-label="Următor" data-i18n-aria="aria_next">›</button>
 </div>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ===== I18N: RO / RU / EN ===== */
+const translations = {
+  ro: {
+    page_title: "Nail & Brow Studio | By Caterina — Manichiură, Gene, Sprâncene, Chișinău",
+    meta_description: "Studio de înfrumusețare în Chișinău, sec. Botanica — manichiură, extensii unghii, laminare și extensii gene, laminare sprâncene. Programări prin Instagram, Viber sau WhatsApp.",
+    og_title: "Nail & Brow Studio | By Caterina",
+    og_description: "Manichiură, gene, sprâncene — Chișinău, sec. Botanica.",
+    nav_servicii: "Servicii",
+    nav_galerie: "Galerie",
+    nav_contact: "Contact",
+    hero_eyebrow: "Chișinău · Sec. Botanica",
+    hero_h1: "Frumusețea stă<br>în <em>detalii.</em>",
+    hero_sub: "Manichiură, extensii de unghii, gene și sprâncene — realizate cu grijă și materiale premium, în studioul Caterinei.",
+    hero_btn: "Vezi galeria",
+    hero_stat_label: "Cliente mulțumite",
+    services_eyebrow: "Servicii",
+    services_title: "Ce facem",
+    services_lede: "De la o manichiură simplă până la un look complet — unghii, gene, sprâncene — totul într-o singură vizită.",
+    service_manichiura: "Manichiură &amp; Unghii",
+    service_pedichiura: "Pedichiură",
+    service_extensii: "Extensii Unghii",
+    service_gene: "Gene",
+    service_sprancene: "Sprâncene",
+    service_nailart: "Nail Art",
+    gallery_eyebrow: "Galerie",
+    gallery_title: "Lucrări recente",
+    gallery_lede: "O selecție de nouă lucrări din studio — atinge orice fotografie pentru a o vedea mărită.",
+    gallery_ig_link: "Mai multe pe Instagram",
+    contact_eyebrow: "Contact",
+    contact_title: "Hai să ne cunoaștem",
+    contact_lede: "Scrie-ne pentru o programare sau treci pe la studio — te așteptăm cu drag.",
+    contact_address_label: "Adresă",
+    contact_address_value: "Chișinău, sec. Botanica",
+    contact_phone_label: "Telefon",
+    footer_location: "Chișinău, sec. Botanica",
+    aria_menu: "Meniu",
+    aria_close: "Închide",
+    aria_prev: "Anterior",
+    aria_next: "Următor"
+  },
+  ru: {
+    page_title: "Nail & Brow Studio | By Caterina — Маникюр, Ресницы, Брови, Кишинёв",
+    meta_description: "Студия красоты в Кишинёве, сектор Ботаника — маникюр, наращивание ногтей, ламинирование и наращивание ресниц, ламинирование бровей. Запись через Instagram, Viber или WhatsApp.",
+    og_title: "Nail & Brow Studio | By Caterina",
+    og_description: "Маникюр, ресницы, брови — Кишинёв, сектор Ботаника.",
+    nav_servicii: "Услуги",
+    nav_galerie: "Галерея",
+    nav_contact: "Контакты",
+    hero_eyebrow: "Кишинёв · Сектор Ботаника",
+    hero_h1: "Красота кроется<br>в <em>деталях.</em>",
+    hero_sub: "Маникюр, наращивание ногтей, ресницы и брови — с вниманием к деталям и премиальными материалами, в студии Катерины.",
+    hero_btn: "Смотреть галерею",
+    hero_stat_label: "Довольных клиенток",
+    services_eyebrow: "Услуги",
+    services_title: "Что мы делаем",
+    services_lede: "От простого маникюра до полного образа — ногти, ресницы, брови — всё за один визит.",
+    service_manichiura: "Маникюр &amp; Ногти",
+    service_pedichiura: "Педикюр",
+    service_extensii: "Наращивание ногтей",
+    service_gene: "Ресницы",
+    service_sprancene: "Брови",
+    service_nailart: "Дизайн ногтей",
+    gallery_eyebrow: "Галерея",
+    gallery_title: "Последние работы",
+    gallery_lede: "Подборка из девяти работ студии — нажмите на любое фото, чтобы увеличить.",
+    gallery_ig_link: "Больше в Instagram",
+    contact_eyebrow: "Контакты",
+    contact_title: "Давайте знакомиться",
+    contact_lede: "Напишите нам, чтобы записаться, или заходите в студию — будем рады вас видеть.",
+    contact_address_label: "Адрес",
+    contact_address_value: "Кишинёв, сектор Ботаника",
+    contact_phone_label: "Телефон",
+    footer_location: "Кишинёв, сектор Ботаника",
+    aria_menu: "Меню",
+    aria_close: "Закрыть",
+    aria_prev: "Назад",
+    aria_next: "Вперёд"
+  },
+  en: {
+    page_title: "Nail & Brow Studio | By Caterina — Manicure, Lashes, Brows, Chisinau",
+    meta_description: "Beauty studio in Chisinau, Botanica sector — manicure, nail extensions, lash lamination and extensions, brow lamination. Book via Instagram, Viber or WhatsApp.",
+    og_title: "Nail & Brow Studio | By Caterina",
+    og_description: "Manicure, lashes, brows — Chisinau, Botanica sector.",
+    nav_servicii: "Services",
+    nav_galerie: "Gallery",
+    nav_contact: "Contact",
+    hero_eyebrow: "Chisinau · Botanica Sector",
+    hero_h1: "Beauty is in<br>the <em>details.</em>",
+    hero_sub: "Manicure, nail extensions, lashes and brows — done with care and premium materials, in Caterina's studio.",
+    hero_btn: "View gallery",
+    hero_stat_label: "Happy clients",
+    services_eyebrow: "Services",
+    services_title: "What we do",
+    services_lede: "From a simple manicure to a complete look — nails, lashes, brows — all in a single visit.",
+    service_manichiura: "Manicure &amp; Nails",
+    service_pedichiura: "Pedicure",
+    service_extensii: "Nail Extensions",
+    service_gene: "Lashes",
+    service_sprancene: "Brows",
+    service_nailart: "Nail Art",
+    gallery_eyebrow: "Gallery",
+    gallery_title: "Recent work",
+    gallery_lede: "A selection of nine pieces of work from the studio — tap any photo to enlarge it.",
+    gallery_ig_link: "More on Instagram",
+    contact_eyebrow: "Contact",
+    contact_title: "Let's get in touch",
+    contact_lede: "Message us to book an appointment, or stop by the studio — we'd love to see you.",
+    contact_address_label: "Address",
+    contact_address_value: "Chisinau, Botanica sector",
+    contact_phone_label: "Phone",
+    footer_location: "Chisinau, Botanica sector",
+    aria_menu: "Menu",
+    aria_close: "Close",
+    aria_prev: "Previous",
+    aria_next: "Next"
+  }
+};
+
+function applyLanguage(lang) {
+  if (!translations[lang]) lang = 'ro';
+  const t = translations[lang];
+
+  document.documentElement.lang = lang;
+  document.title = t.page_title;
+
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute('content', t.meta_description);
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', t.og_title);
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute('content', t.og_description);
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria');
+    if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+  });
+
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  try { localStorage.setItem('studioLang', lang); } catch (e) {}
+}
+
+function detectInitialLang() {
+  try {
+    const saved = localStorage.getItem('studioLang');
+    if (saved && translations[saved]) return saved;
+  } catch (e) {}
+  const browserLang = (navigator.language || 'ro').slice(0, 2).toLowerCase();
+  if (translations[browserLang]) return browserLang;
+  return 'ro';
+}
+
+document.querySelectorAll('.lang-switch button').forEach(btn => {
+  btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
+});
+
+applyLanguage(detectInitialLang());
 
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('solid', window.scrollY > 30); });
@@ -517,59 +509,28 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-document.querySelectorAll('.price-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.price-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
-  });
-});
-
+/* ===== GALERIE: exact 9 fotografii, gallery1.jpg ... gallery9.jpg ===== */
 const galleryEl = document.getElementById('gallery');
 const loadedImages = [];
 let lbIndex = 0;
 
-function probeImage(src) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload  = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = src;
-  });
+for (let i = 1; i <= 9; i++) {
+  const src = `images/pic${i}.jpg`;
+  const idx = loadedImages.length;
+  loadedImages.push(src);
+  const item = document.createElement('div');
+  item.className = 'gallery-item';
+  item.onclick = () => openLb(idx);
+  const img = document.createElement('img');
+  img.src = src; img.alt = ''; img.loading = 'lazy';
+  img.onerror = () => { item.style.background = 'var(--cream)'; img.remove(); };
+  const zoom = document.createElement('span');
+  zoom.className = 'zoom-icon';
+  zoom.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+  item.appendChild(img);
+  item.appendChild(zoom);
+  galleryEl.appendChild(item);
 }
-
-async function buildGallery() {
-  let misses = 0, i = 1;
-  while (misses < 3 && i <= 99) {
-    const src = `pic${i}.jpg`;
-    const ok = await probeImage(src);
-    if (ok) {
-      misses = 0;
-      const idx = loadedImages.length;
-      loadedImages.push(src);
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.onclick = () => openLb(idx);
-      const img = document.createElement('img');
-      img.src = src; img.alt = ''; img.loading = 'lazy';
-      img.onload = () => { item.classList.add('loaded'); };
-      const zoom = document.createElement('span');
-      zoom.className = 'zoom-icon';
-      zoom.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
-      item.appendChild(img);
-      item.appendChild(zoom);
-      galleryEl.appendChild(item);
-    } else {
-      misses++;
-    }
-    i++;
-  }
-  if (loadedImages.length === 0) {
-    document.getElementById('galleryEmpty').style.display = 'block';
-  }
-}
-buildGallery();
 
 function updateLbCounter() { document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${loadedImages.length}`; }
 function openLb(idx) {
